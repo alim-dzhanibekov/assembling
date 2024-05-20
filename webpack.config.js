@@ -1,14 +1,24 @@
 const path = require('path');
 const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-    entry: './src/index.js',
+    entry: './src/index.tsx',
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.js'
     },
+    resolve: {
+        extensions: ['.js', '.jsx', '.ts', '.tsx']
+    },
+    devtool: 'inline-source-map',
     module: {
         rules: [
+            {
+                test: /\.tsx?$/,
+                use: 'ts-loader',
+                exclude: /node_modules/,
+            },
             {
                 test: /\.(js|jsx)$/,
                 exclude: /node_modules/,
@@ -24,48 +34,12 @@ module.exports = {
             }
         ]
     },
-
-};
-
-module.exports = {
-    // ... другие настройки ...
-    module: {
-        rules: [
-            // ... другие правила ...
-            {
-                test: /\.css$/,
-                use: ['style-loader', 'css-loader', 'postcss-loader'],
-                options: {
-                    modules: true,
-                    localIdentName: '[name]__[local]__[hash:base64:5]'
-                }
-            }
-        ]
-    }
-};
-
-module.exports = {
-    // ... другие настройки ...
-    module: {
-        rules: [
-            // ... другие правила ...
-            {
-                test: /\.js$/,
-                use: 'babel-loader',
-                exclude: /node_modules/,
-                include: /src/
-            }
-        ]
-    },
-    resolve: {
-        extensions: ['*', '.js', '.jsx','.css', '.scss'],
-    },
-    plugins: [
-    ],
+    plugins: [new HtmlWebpackPlugin({
+        template: path.resolve(__dirname, 'public', 'index.html')
+    })],
     devServer: {
-        port: 8001,
+        port: 3000,
         hot: true,
     },
-    mode: 'development',
+    mode: 'development'
 };
-
