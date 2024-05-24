@@ -39,8 +39,20 @@ const Calculator = () => {
   return (
     <div>
       <h1>Калькулятор</h1>
-      <input type="tel" pattern="[0-9]*" value={num1} onChange={handleNum1Change} placeholder="Введите число 1" />
-      <input type="tel" pattern="[0-9]*" value={num2} onChange={handleNum2Change} placeholder="Введите число 2" />
+      <input
+        type="tel"
+        pattern="[0-9]*"
+        value={num1}
+        onChange={handleNum1Change}
+        placeholder="Введите число 1"
+      />
+      <input
+        type="tel"
+        pattern="[0-9]*"
+        value={num2}
+        onChange={handleNum2Change}
+        placeholder="Введите число 2"
+      />
       <button onClick={handleAdd}>Сложить</button>
       <button onClick={handleSubtract}>Вычесть</button>
       <button onClick={handleMultiply}>Умножить</button>
